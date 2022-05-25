@@ -1,6 +1,11 @@
 window.addEventListener('DOMContentLoaded', async(event) => {
 // SVGを使うときに知っておくといいことをまとめました
 // https://qiita.com/manabuyasuda/items/01a76204f97cd73ffc4e
+    try {
+        window.mpurse.updateEmitter.removeAllListeners()
+          .on('stateChanged', isUnlocked => console.log(isUnlocked))
+          .on('addressChanged', address => console.log(address));
+    } catch(e) { console.debug(e) }
     const baseUrl = `./asset/image/sns/`
     let res = await fetch(`${baseUrl}list.tsv`)
     let text = await res.text()
